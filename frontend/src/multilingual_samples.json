@@ -1,0 +1,205 @@
+{
+  "CVE-2015-10128": {
+    "severity": "Low",
+    "texts": {
+      "ar": "تم العثور على ضعف في متضمن rt-prettyphoto حتى 1.2 على WordPress وتصنف على أنها مشكلة. تأثرت هذه المشكلة من خلال وظيفة royal_prettyphoto_plugin_links من الملف rt-prettyphoto.php. يؤدي التلاعب إلى تعديل النصوص عبر الموقع. يمكن إطلاق الهجوم عن بعد. التحديث إلى الإصدار 1.3 قادر على معالجة هذه المشكلة. يتم تحديد المصلة باسم 0d3d38cfa487481b66869e4212df1cefc281ecb7. يوصى بتحديث المكون المتضرر. VDB-249422 هو المعرف المخصص لهذا الضرر.",
+      "es": "Se encontró una vulnerabilidad en el plugin rt-prettyphoto hasta 1.2 en WordPress y se clasificó como problemático. Afecto por este problema es la función royal_prettyphoto_plugin_links del archivo rt-prettyphoto.php. La manipulación conduce a un scripting de sitio. El ataque puede ser lanzado remotamente. La actualización a la versión 1.3 puede resolver este problema. El parche se identifica como 0d3d38cfa487481b66869e4212df1cefc281ecb7. Se recomienda actualizar el componente afectado. VDB-249422 es el identificador asignado a esta vulnerabilidad.",
+      "fr": "Une vulnérabilité a été trouvée dans le plugin rt-prettyphoto jusqu'à 1.2 sur WordPress et classée comme problématique. Affectée par ce problème est la fonction royal_prettyphoto_plugin_links du fichier rt-prettyphoto.php. La manipulation conduit à un scripting de site. L'attaque peut être lancée à distance. La mise à niveau vers la version 1.3 peut résoudre ce problème. Le correctif est identifié comme 0d3d38cfa487481b66869e4212df1cefc281ecb7. Il est recommandé de mettre à niveau le composant affecté. VDB-249422 est l'identificateur attribué à cette vulnérabilité.",
+      "hi": "वर्डप्रेस पर rt-prettyphoto प्लगइन में 1.2 तक की एक कमजोरियों को पाया गया और इसे समस्याग्रस्त के रूप में वर्गीकृत किया गया। इस समस्या से प्रभावित फ़ाइल rt-prettyphoto.php का royal_prettyphoto_plugin_links फ़ंक्शन है। हेरफेर से साइट क्रॉस स्क्रिप्टिंग होती है। हमले को दूरस्थ रूप से लॉन्च किया जा सकता है। संस्करण 1.3 में अपग्रेड इस समस्या को हल करने में सक्षम है। पैच को 0d3d38cfa487481b66869e4212df1cefc281ecb7 के रूप में पहचाना गया है। प्रभावित घटक को अपग्रेड करने की सिफारिश की जाती है। VDB-249422 इस कमजोरियों को सौंपा गया पहचानकर्ता है।",
+      "zh": "在WordPress上 rt-prettyphoto插件中发现了一个漏洞,高达1.2个,并被归类为有问题的.该问题影响的是rt-prettyphoto.php文件的 royal_prettyphoto_plugin_links功能.操作导致跨站点脚本编写.攻击可能会远程启动.升级到1.3版本可以解决这个问题.补丁被确定为0d3d38cfa487481b66869e4212df1cefc281ecb7.建议升级受影响的组件.VDB-249422是该漏洞分配的标识符.",
+      "en": "A vulnerability was found in rt-prettyphoto Plugin up to 1.2 on WordPress and classified as problematic. Affected by this issue is the function royal_prettyphoto_plugin_links of the file rt-prettyphoto.php. The manipulation leads to cross site scripting. The attack may be launched remotely. Upgrading to version 1.3 is able to address this issue. The patch is identified as 0d3d38cfa487481b66869e4212df1cefc281ecb7. It is recommended to upgrade the affected component. VDB-249422 is the identifier assigned to this vulnerability."
+    }
+  },
+  "CVE-2023-28722": {
+    "severity": "Medium",
+    "texts": {
+      "ar": "قد تسمح قيود الغطاء غير المناسبة لبعض برنامج التثبيت التشغيلي لـ Intel NUC BIOS قبل إصدار IN0048 للمستخدم الممتاز بتسهيل تصعيد الامتيازات عبر الوصول المحلي.",
+      "es": "Las restricciones de buffer inadecuadas para algunos firmware de BIOS de Intel NUC antes de la versión IN0048 pueden permitir que un usuario privilegiado permita potencialmente la escalación de privilegios a través del acceso local.",
+      "fr": "Les restrictions de tampon inappropriées pour certains firmware BIOS Intel NUC avant la version IN0048 peuvent permettre à un utilisateur privilégié de permettre potentiellement une escalade de privilège via un accès local.",
+      "hi": "IN0048 संस्करण से पहले कुछ इंटेल NUC BIOS फर्मवेयर के लिए अनुचित बफर प्रतिबंधों से एक विशेषाधिकार प्राप्त उपयोगकर्ता को स्थानीय पहुंच के माध्यम से विशेषाधिकारों के बढ़ोतरी को संभावित रूप से सक्षम करने की अनुमति मिल सकती है।",
+      "zh": "在 IN0048 版本之前,一些英特尔NUC BIOS固件的不适当缓冲限制可能允许特权用户通过本地访问可能实现特权升级."
+    }
+  },
+  "CVE-2023-33030": {
+    "severity": "Critical",
+    "texts": {
+      "ar": "إفساد الذاكرة في HLOS أثناء تشغيل حالة الاستخدام جاهزة للعب.",
+      "es": "Corrupción de la memoria en HLOS mientras se ejecuta el caso de uso listo para jugar.",
+      "fr": "Corruption de la mémoire dans le HLOS lors de l'exécution d'un cas d'utilisation prêt à être joué.",
+      "hi": "प्ले-ready उपयोग-केस चलाने के दौरान HLOS में मेमोरी भ्रष्टाचार।",
+      "en": "Memory corruption in HLOS while running playready use-case."
+    }
+  },
+  "CVE-2023-45039": {
+    "severity": "Low",
+    "texts": {
+      "ar": "تم الإبلاغ عن نسخة حافظة دون التحقق من حجم ضعف المدخل تؤثر على العديد من إصدارات نظام تشغيل QNAP. إذا تم استغلالها، يمكن أن يسمح هذا الضرر للمديري الموثقين بتنفيذ الرمز عبر الشبكة. لقد قمنا بالفعل بتحرير الضرر في الإصدارات التالية: QTS 5.1.4.2596 build 20231128 ولاحقا QuTS hero h5.1.4.2596 build 20231128 ولاحقا",
+      "es": "Se ha informado de que una copia de buffer sin verificar el tamaño de la vulnerabilidad de entrada afecta a varias versiones del sistema operativo QNAP. Si se explota, la vulnerabilidad podría permitir a los administradores autenticados ejecutar código a través de una red. Ya hemos solucionado la vulnerabilidad en las siguientes versiones: QTS 5.1.4.2596 build 20231128 y posteriormente QuTS hero h5.1.4.2596 build 20231128 y posteriormente",
+      "fr": "Une copie tampon sans vérifier la taille de la vulnérabilité d'entrée a été rapportée pour affecter plusieurs versions du système d'exploitation QNAP. Si exploitée, la vulnérabilité pourrait permettre aux administrateurs authentifiés d'exécuter du code via un réseau. Nous avons déjà corrigé la vulnérabilité dans les versions suivantes: QTS 5.1.4.2596 build 20231128 et plus tard QuTS hero h5.1.4.2596 build 20231128 et plus tard",
+      "hi": "इनपुट भेद्यता के आकार की जांच किए बिना एक बफर कॉपी कई QNAP ऑपरेटिंग सिस्टम संस्करणों को प्रभावित करने की सूचना दी गई है। यदि इसका शोषण किया जाता है, तो यह भेद्यता प्रमाणित प्रशासकों को नेटवर्क के माध्यम से कोड निष्पादित करने की अनुमति दे सकती है। हमने पहले ही निम्नलिखित संस्करणों में भेद्यता को ठीक कर दिया हैः QTS 5.1.4.2596 build 20231128 और बाद में QuTS hero h5.1.4.2596 build 20231128 और बाद में",
+      "zh": "据报道,一个不检查输入漏洞的大小的缓冲拷贝会影响几个QNAP操作系统版本.如果被利用,漏洞可能允许认证管理员通过网络执行代码.我们已经在以下版本中修复了漏洞:QTS 5.1.4.2596 build 20231128 和后来的QuTS hero h5.1.4.2596 build 20231128 和后来的",
+      "en": "A buffer copy without checking size of input vulnerability has been reported to affect several QNAP operating system versions. If exploited, the vulnerability could allow authenticated administrators to execute code via a network.\n\nWe have already fixed the vulnerability in the following versions:\nQTS 5.1.4.2596 build 20231128 and later\nQuTS hero h5.1.4.2596 build 20231128 and later"
+    }
+  },
+  "CVE-2023-45043": {
+    "severity": "Low",
+    "texts": {
+      "ar": "تم الإبلاغ عن نسخة حافظة دون التحقق من حجم ضعف المدخل تؤثر على العديد من إصدارات نظام تشغيل QNAP. إذا تم استغلالها، يمكن أن يسمح هذا الضرر للمديري الموثقين بتنفيذ الرمز عبر الشبكة. لقد قمنا بالفعل بتحرير الضرر في الإصدارات التالية: QTS 5.1.4.2596 build 20231128 ولاحقا QuTS hero h5.1.4.2596 build 20231128 ولاحقا",
+      "es": "Se ha informado de que una copia de buffer sin verificar el tamaño de la vulnerabilidad de entrada afecta a varias versiones del sistema operativo QNAP. Si se explota, la vulnerabilidad podría permitir a los administradores autenticados ejecutar código a través de una red. Ya hemos solucionado la vulnerabilidad en las siguientes versiones: QTS 5.1.4.2596 build 20231128 y posteriormente QuTS hero h5.1.4.2596 build 20231128 y posteriormente",
+      "fr": "Une copie tampon sans vérifier la taille de la vulnérabilité d'entrée a été rapportée pour affecter plusieurs versions du système d'exploitation QNAP. Si exploitée, la vulnérabilité pourrait permettre aux administrateurs authentifiés d'exécuter du code via un réseau. Nous avons déjà corrigé la vulnérabilité dans les versions suivantes: QTS 5.1.4.2596 build 20231128 et plus tard QuTS hero h5.1.4.2596 build 20231128 et plus tard",
+      "hi": "इनपुट भेद्यता के आकार की जांच किए बिना एक बफर कॉपी कई QNAP ऑपरेटिंग सिस्टम संस्करणों को प्रभावित करने की सूचना दी गई है। यदि इसका शोषण किया जाता है, तो यह भेद्यता प्रमाणित प्रशासकों को नेटवर्क के माध्यम से कोड निष्पादित करने की अनुमति दे सकती है। हमने पहले ही निम्नलिखित संस्करणों में भेद्यता को ठीक कर दिया हैः QTS 5.1.4.2596 build 20231128 और बाद में QuTS hero h5.1.4.2596 build 20231128 और बाद में",
+      "zh": "据报道,一个不检查输入漏洞的大小的缓冲拷贝会影响几个QNAP操作系统版本.如果被利用,漏洞可能允许认证管理员通过网络执行代码.我们已经在以下版本中修复了漏洞:QTS 5.1.4.2596 build 20231128 和后来的QuTS hero h5.1.4.2596 build 20231128 和后来的",
+      "en": "A buffer copy without checking size of input vulnerability has been reported to affect several QNAP operating system versions. If exploited, the vulnerability could allow authenticated administrators to execute code via a network.\n\nWe have already fixed the vulnerability in the following versions:\nQTS 5.1.4.2596 build 20231128 and later\nQuTS hero h5.1.4.2596 build 20231128 and later"
+    }
+  },
+  "CVE-2023-48265": {
+    "severity": "High",
+    "texts": {
+      "ar": "تسمح هذه الضعف للمهاجم عن بعد غير المصادق بإجراء هجوم \"رفض الخدمة\" أو، ربما، الحصول على تنفيذ رمز عن بعد (RCE) عبر طلب شبكة مصمم.",
+      "es": "La vulnerabilidad permite a un atacante remoto no autenticado realizar un ataque de Denial of Service (DoS) o, posiblemente, obtener la ejecución remota de código (RCE) a través de una solicitud de red elaborada.",
+      "fr": "La vulnérabilité permet à un attaquant distant non authentifié d'effectuer une attaque Denial-of-Service (DoS) ou, éventuellement, d'obtenir une exécution de code à distance (RCE) via une demande réseau créée.",
+      "hi": "कमजोरता एक गैर-मान्यता प्राप्त दूरस्थ हमलावर को सेवा-निषेध (DoS) हमले करने या संभवतः एक निर्मित नेटवर्क अनुरोध के माध्यम से दूरस्थ कोड निष्पादन (RCE) प्राप्त करने की अनुमति देती है।",
+      "zh": "漏洞允许未认证的远程攻击者执行拒绝服务 (DoS) 攻击或可能通过构造的网络请求获得远程代码执行 (RCE).",
+      "en": "The vulnerability allows an unauthenticated remote attacker to perform a Denial-of-Service (DoS) attack or, possibly, obtain Remote Code Execution (RCE) via a crafted network request."
+    }
+  },
+  "CVE-2023-49121": {
+    "severity": "High",
+    "texts": {
+      "ar": "تم تحديد ثغرة في Solid Edge SE2023 (جميع الإصدارات < V223.0 Update 10). التطبيق المتضرر عرضة لانتفاضة البفر القائم على كومة أثناء تحليل ملفات PAR المصممة خصيصًا. قد يسمح هذا للمهاجم بتنفيذ الكود في سياق العملية الحالية.",
+      "es": "Se ha identificado una vulnerabilidad en Solid Edge SE2023 (Todas las versiones < V223.0 Actualización 10). La aplicación afectada es vulnerable al desbordamiento de buffer basado en el montón mientras analiza archivos PAR especialmente creados. Esto podría permitir que un atacante ejecute código en el contexto del proceso actual.",
+      "fr": "Une vulnérabilité a été identifiée dans Solid Edge SE2023 (toutes versions < V223.0 Mise à jour 10). L'application affectée est vulnérable au débordement de tampon basé sur des piles tout en analysant des fichiers PAR spécialement créés. Cela pourrait permettre à un attaquant d'exécuter du code dans le contexte du processus en cours.",
+      "zh": "在Solid Edge SE2023中发现了一个漏洞 (所有版本 < V223.0更新10).当分析专门制作的 PAR文件时,受影响的应用程序容易受到堆积式缓冲器溢出的影响.这可能允许攻击者在当前进程的背景下执行代码.",
+      "en": "A vulnerability has been identified in Solid Edge SE2023 (All versions < V223.0 Update 10). The affected application is vulnerable to heap-based buffer overflow while parsing specially crafted PAR files. This could allow an attacker to execute code in the context of the current process."
+    }
+  },
+  "CVE-2023-50333": {
+    "severity": "Low",
+    "texts": {
+      "ar": "فشل Mattermost في تحديث إذنات الجلسة الحالية لمستخدم تم تخفيضه للتو إلى ضيف ، مما يسمح للضيوف المُخفضين حديثًا بتغيير أسماء المجموعات.",
+      "es": "Mattermost no actualiza los permisos de la sesión actual para un usuario que acaba de ser rebajado a invitado, permitiendo a los invitados recién rebajados cambiar los nombres de grupo.",
+      "fr": "Mattermost ne parvient pas à mettre à jour les autorisations de la session en cours pour un utilisateur qui vient d'être rétrogradé en invité, ce qui permet aux invités récemment rétrogradés de changer de nom de groupe.",
+      "hi": "Mattermost एक उपयोगकर्ता के लिए वर्तमान सत्र की अनुमति को अपडेट करने में विफल रहता है जिसे अभी अतिथि के रूप में नीचे कर दिया गया था, जिससे नए नीचे किए गए अतिथि समूह के नाम बदलने की अनुमति मिलती है।",
+      "en": "Mattermost fails to update the permissions of the current session for a user who was just demoted to guest, allowing freshly demoted guests to change group names."
+    }
+  },
+  "CVE-2023-51735": {
+    "severity": "Medium",
+    "texts": {
+      "ar": "هذه الضعفية موجودة في جهاز سكاي وورث CM5100 ، الإصدار 4.1.1.24, بسبب عدم التحقق الكافي من المدخلات التي قدمها المستخدم لمعيار مفتاح Pre-shared في واجهته الويب. يمكن للمهاجم عن بعد استغلال هذه الضعفية عن طريق توفير مدخلات مصممة خصيصًا إلى المعلم في واجهة الويب للنظام المستهدف الضعف. يمكن للاستغلال الناجح لهذه الضعفية أن يسمح للمهاجم بتنفيذ هجمات XSS المخزنة على النظام المستهدف.",
+      "es": "Esta vulnerabilidad existe en Skyworth Router CM5100, versión 4.1.1.24, debido a la validación insuficiente de la entrada suministrada por el usuario para el parámetro de clave pre-compartida en su interfaz web. Un atacante remoto podría explotar esta vulnerabilidad suministrando entradas especialmente diseñadas al parámetro en la interfaz web del sistema objetivo vulnerable. La explotación exitosa de esta vulnerabilidad podría permitir al atacante realizar ataques XSS almacenados en el sistema objetivo.",
+      "fr": "Cette vulnérabilité existe dans le routeur Skyworth CM5100, version 4.1.1.24, en raison de la validation insuffisante de l'entrée fournie par l'utilisateur pour le paramètre de clé pré-partagée sur son interface Web. Un attaquant distant pourrait exploiter cette vulnérabilité en fournissant des entrées spécialement conçues au paramètre à l'interface Web du système ciblé vulnérable. L'exploitation réussie de cette vulnérabilité pourrait permettre à l'attaquant d'effectuer des attaques XSS stockées sur le système ciblé.",
+      "hi": "यह कमजोरियों के कारण स्काईवर्थ राउटर CM5100, संस्करण 4.1.1.24, में मौजूद है अपने वेब इंटरफ़ेस पर प्री-शेयर कुंजी पैरामीटर के लिए उपयोगकर्ता द्वारा प्रदान किए गए इनपुट की अपर्याप्त सत्यापन के कारण। एक दूरस्थ हमलावर इस कमजोरियों का लाभ उठा सकता है, कमजोर लक्षित प्रणाली के वेब इंटरफ़ेस पर पैरामीटर को विशेष रूप से निर्मित इनपुट प्रदान करके। इस कमजोरियों का सफल उपयोग हमलावर को लक्षित प्रणाली पर संग्रहीत XSS हमलों को करने की अनुमति दे सकता है।"
+    }
+  },
+  "CVE-2023-51925": {
+    "severity": "Critical",
+    "texts": {
+      "ar": "تعرض لخطر تحميل ملف تعسفي في nccloud.web.arcp.taskmonitor.action.ArcpUploadAction.doAction() طريقة YonBIP v3_23.05 يسمح للمهاجمين بتنفيذ رمز تعسفي عن طريق تحميل ملف صناعي.",
+      "es": "Una vulnerabilidad de carga de archivos arbitrarios en el método nccloud.web.arcp.taskmonitor.action.ArcpUploadAction.doAction() de YonBIP v3_23.05 permite a los atacantes ejecutar código arbitrario mediante la carga de un archivo creado.",
+      "fr": "Une vulnérabilité de téléchargement de fichier arbitraire dans la méthode nccloud.web.arcp.taskmonitor.action.ArcpUploadAction.doAction() de YonBIP v3_23.05 permet aux attaquants d'exécuter du code arbitraire en téléchargeant un fichier créé.",
+      "hi": "YonBIP v3_23.05 की nccloud.web.arcp.taskmonitor.action.ArcpUploadAction.doAction() विधि में एक मनमाना फ़ाइल अपलोड भेद्यता हमलावरों को एक निर्मित फ़ाइल अपलोड करके मनमाना कोड निष्पादित करने की अनुमति देती है।",
+      "zh": "随意文件上传漏洞在nccloud.web.arcp.taskmonitor.action.ArcpUploadAction.doAction() 方法 YonBIP v3_23.05允许攻击者通过上传一个制作的文件执行随意代码."
+    }
+  },
+  "CVE-2023-51969": {
+    "severity": "Critical",
+    "texts": {
+      "ar": "تندا AX1803 v1.0.0.1 تحتوي على إفراط كومة عبر مبرمج iptv.city.vlan في وظيفة getIptvInfo.",
+      "es": "Tenda AX1803 v1.0.0.1 contiene un desbordamiento de pila a través del parámetro iptv.city.vlan en la función getIptvInfo.",
+      "fr": "Le Tenda AX1803 v1.0.0.1 contient un débordement de pile via le paramètre iptv.city.vlan dans la fonction getIptvInfo.",
+      "hi": "Tenda AX1803 v1.0.0.1 में iptv.city.vlan पैरामीटर के माध्यम से एक स्टैक ओवरफ्लो है getIptvInfo फ़ंक्शन में।",
+      "zh": "通过 getIptvInfo函数的iptv.city.vlan参数,Tenda AX1803 v1.0.0.1 包含了堆积溢出.",
+      "en": "Tenda AX1803 v1.0.0.1 contains a stack overflow via the iptv.city.vlan parameter in the function getIptvInfo."
+    }
+  },
+  "CVE-2023-52102": {
+    "severity": "High",
+    "texts": {
+      "ar": "ضعف المعايير التي لا يتم التحقق منها في وحدة WMS. قد يؤثر استغلال هذا الضرر بنجاح على سرية الخدمة.",
+      "es": "Vulnerabilidad de los parámetros que no se verifican en el módulo WMS. La explotación exitosa de esta vulnerabilidad puede afectar la confidencialidad del servicio.",
+      "fr": "Vulnérabilité des paramètres qui ne sont pas vérifiés dans le module WMS. L'exploitation réussie de cette vulnérabilité peut affecter la confidentialité du service.",
+      "hi": "WMS मॉड्यूल में सत्यापित नहीं किए जाने वाले पैरामीटर की भेद्यता। इस भेद्यता का सफल उपयोग सेवा गोपनीयता को प्रभावित कर सकता है।"
+    }
+  },
+  "CVE-2023-7028": {
+    "severity": "Critical",
+    "texts": {
+      "es": "Se ha descubierto un problema en GitLab CE/EE que afecta a todas las versiones desde 16.1 antes de 16.1.6, 16.2 antes de 16.2.9, 16.3 antes de 16.3.7, 16.4 antes de 16.4.5, 16.5 antes de 16.5.6, 16.6 antes de 16.6.4, y 16.7 antes de 16.7.2 en las que los correos electrónicos de restablecimiento de contraseña de cuenta de usuario podrían ser entregados a una dirección de correo electrónico no verificada.",
+      "fr": "Un problème a été découvert dans GitLab CE/EE affectant toutes les versions de 16.1 avant 16.1.6, 16.2 avant 16.2.9, 16.3 avant 16.3.7, 16.4 avant 16.4.5, 16.5 avant 16.5.6, 16.6 avant 16.6.4 et 16.7 avant 16.7.2 dans lequel les e-mails de réinitialisation du mot de passe du compte utilisateur pouvaient être livrés à une adresse e-mail non vérifiée.",
+      "hi": "GitLab CE/EE में एक समस्या का पता चला है जो 16.1 से पहले 16.1.6, 16.2.9 से पहले 16.2.2, 16.3.7, 16.4.5 से पहले 16.4.5, 16.5.6 से पहले 16.5.6, 16.6.4 से पहले 16.7.2 से पहले सभी संस्करणों को प्रभावित करती है जिसमें उपयोगकर्ता खाता पासवर्ड रीसेट ईमेल एक असत्यापित ईमेल पते पर पहुंचाया जा सकता है।"
+    }
+  },
+  "CVE-2023-7153": {
+    "severity": "Medium",
+    "texts": {
+      "ar": "عدم تحدّيد المدخلات بشكل صحيح أثناء إنتاج صفحات الويب (\"تصفيق النص عبر الموقع\") في برنامج ماكروتورك وتكنولوجيات الإنترنت يسمح بـ \"ماكروبل\" لـ \"XSS المتعكس\". تؤثر هذه المشكلة على \"ماكروبل\": قبل V.1.0.1.",
+      "es": "La vulnerabilidad de la \"neutralización inadecuada de la entrada durante la generación de páginas web\" (\"Scripting en todo sitio\") en Macroturk Software and Internet Technologies Macro-Bel permite Reflected XSS. Este problema afecta a Macro-Bel: antes de V.1.0.1.",
+      "fr": "Une vulnérabilité de \"Scripting cross-site\" dans le logiciel et les technologies Internet Macro-Bel permet de refléter XSS. Ce problème affecte Macro-Bel: avant V.1.0.1.",
+      "hi": "मैक्रोटर्क सॉफ्टवेयर और इंटरनेट टेक्नोलॉजीज मैक्रो-बेल में वेब पेज जनरेशन के दौरान इनपुट का गलत न्यूट्रलाइज़ेशन ('क्रॉस-साइट स्क्रिप्टिंग') भेद्यता Reflected XSS की अनुमति देती है। यह समस्या मैक्रो-बेल को प्रभावित करती हैः V.1.0.1 से पहले।"
+    }
+  },
+  "CVE-2024-0722": {
+    "severity": "Low",
+    "texts": {
+      "ar": "تم العثور على ثغرة في مشروعات الشبكات الاجتماعية موقع 1.0 وتم تصنيفها كمشكلة. تأثرت هذه المشكلة بعض وظائف غير معروفة من الملف message.php من المكونة صفحة الرسالة. التلاعب بالحجة القصة يؤدي إلى تعديل النصوص عبر الموقع. يمكن إطلاق الهجوم عن بعد. تم الكشف عن الاستغلال للجمهور ويمكن استخدامها. VDB-251546 هو المعرف المخصص لهذا الثغرة.",
+      "es": "Se encontró una vulnerabilidad en los proyectos de código de Social Networking Site 1.0 y se clasificó como problemática. Este problema afecta a alguna funcionalidad desconocida del archivo message.php de la página de mensaje. La manipulación del argumento Story conduce a un scripting de sitios. El ataque puede ser lanzado remotamente. El exploit ha sido revelado al público y puede ser utilizado. VDB-251546 es el identificador asignado a esta vulnerabilidad.",
+      "fr": "Une vulnérabilité a été trouvée dans les projets de code Social Networking Site 1.0 et classée comme problématique. Affectée par ce problème est une fonctionnalité inconnue du fichier message.php de la page de message composante. La manipulation de l'argument Story conduit à un scripting de site. L'attaque peut être lancée à distance. L'exploit a été divulgué au public et peut être utilisé. VDB-251546 est l'identificateur attribué à cette vulnérabilité."
+    }
+  },
+  "CVE-2024-20712": {
+    "severity": "Medium",
+    "texts": {
+      "ar": "تعاني Adobe Substance 3D Stager الإصدارات 2.1.3 وما سبق من ضعف قراءة خارج الحدود يمكن أن يؤدي إلى الكشف عن الذاكرة الحساسة. يمكن للمهاجم استخدام هذا الضرر لتجاوز التخفيفات مثل ASLR. يستغل هذا المشكلة يتطلب تفاعل المستخدم حيث يجب على الضحية فتح ملف ضار.",
+      "es": "Adobe Substance 3D Stager versiones 2.1.3 y anteriores se ven afectadas por una vulnerabilidad de lectura fuera de los límites que podría llevar a la divulgación de memoria sensible. Un atacante podría aprovechar esta vulnerabilidad para evitar mitigations como ASLR. La explotación de este problema requiere interacción del usuario en el sentido de que una víctima debe abrir un archivo malicioso.",
+      "fr": "Les versions 2.1.3 et antérieures d'Adobe Substance 3D Stager sont affectées par une vulnérabilité de lecture hors limites qui pourrait entraîner la divulgation de mémoire sensible. Un attaquant pourrait tirer parti de cette vulnérabilité pour contourner des atténuations telles que ASLR. L'exploitation de ce problème nécessite une interaction utilisateur dans la mesure où une victime doit ouvrir un fichier malveillant.",
+      "hi": "Adobe Substance 3D Stager संस्करण 2.1.3 और इससे पहले एक सीमा से बाहर पढ़ने की भेद्यता से प्रभावित होते हैं जो संवेदनशील स्मृति के खुलासे का कारण बन सकता है। एक हमलावर ASLR जैसे mitigations को बायपास करने के लिए इस भेद्यता का लाभ उठा सकता है। इस समस्या का लाभ उठाने के लिए उपयोगकर्ता बातचीत की आवश्यकता होती है क्योंकि एक पीड़ित को एक दुर्भावनापूर्ण फ़ाइल खोलना चाहिए।",
+      "zh": "亚多贝实质3D Stager版本 2.1.3及更早版本受到外部阅读漏洞的影响,可能导致泄露敏感内存.攻击者可以利用这种漏洞来绕过ASLR等减轻措施.利用这个问题需要用户互动,因为受害者必须打开恶意文件.",
+      "en": "Adobe Substance 3D Stager versions 2.1.3 and earlier are affected by an out-of-bounds read vulnerability that could lead to disclosure of sensitive memory. An attacker could leverage this vulnerability to bypass mitigations such as ASLR. Exploitation of this issue requires user interaction in that a victim must open a malicious file."
+    }
+  },
+  "CVE-2024-21313": {
+    "severity": "Medium",
+    "texts": {
+      "ar": "ضعف إفصاح المعلومات في Windows TCP/IP",
+      "es": "Vulnerabilidad de la divulgación de información TCP/IP de Windows",
+      "fr": "Vulnérabilité de la divulgation des informations TCP/IP de Windows",
+      "en": "Windows TCP/IP Information Disclosure Vulnerability"
+    }
+  },
+  "CVE-2024-21631": {
+    "severity": "Medium",
+    "texts": {
+      "zh": "Vapor是Swift的HTTP网络框架.在4.90.0版本之前, Vapor的 `vapor_urlparser_parse`功能在解析URI的组件时使用了 `uint16_t`索引,这可能会导致不值得信赖的输入进行解析时整数过.此漏洞不会直接影响 Vapor,但可能会影响依赖于URI类型的应用程序来验证用户输入.URI类型在 Vapor中使用在几个地方.开发人员可能决定在应用程序中使用URI来表示URL (特别是如果该 URL 然后传递给HTTP客户端) 并依赖于其公共属性和方法.然而,由于串段被转换为16-bit,URI可能无法正确解析一个有效的URL (虽然不正常长).由于串段被转换为补丁器.如果该应用程序使用一个有效的URL,则可能会导致一个不值的URL或一个值的URL被被接入.如果该版本包含一个有效的URL或一个值,则可能会导致一个不值的URL或一个值的",
+      "en": "Vapor is an HTTP web framework for Swift. Prior to version 4.90.0, Vapor's `vapor_urlparser_parse` function uses `uint16_t` indexes when parsing a URI's components, which may cause integer overflows when parsing untrusted inputs. This vulnerability does not affect Vapor directly but could impact applications relying on the URI type for validating user input. The URI type is used in several places in Vapor. A developer may decide to use URI to represent a URL in their application (especially if that URL is then passed to the HTTP Client) and rely on its public properties and methods. However, URI may fail to properly parse a valid (albeit abnormally long) URL, due to string ranges being converted to 16-bit integers. An attacker may use this behavior to trick the application into accepting a URL to an untrusted destination. By padding the port number with zeros, an attacker can cause an integer overflow to occur when the URL authority is parsed and, as a result, spoof the host. Version 4.90.0 contains a patch for this issue. As a workaround, validate user input before parsing as a URI or, if possible, use Foundation's `URL` and `URLComponents` utilities."
+    }
+  },
+  "CVE-2024-21669": {
+    "severity": "Critical",
+    "texts": {
+      "ar": "Hyperledger Aries Cloud Agent Python (ACA-Py) هو أساس لبناء تطبيقات الهوية اللامركزية والخدمات التي تعمل في بيئات غير محمولة. عند التحقق من اعتمادات W3C Format Verifiable باستخدام JSON-LD مع دليل البيانات المرتبطة (LDP-VCs) ، لم يتم اعتبار نتيجة التحقق من العرض `document.proof` في القيمة النهائية `verified (`true`/`false`) على سجل العرض. تمكن العاملون بمهارات W3C Format Verifiable باستخدام JSON-LD مع دليل البيانات المرتبطة (LDPs) من تقديم أدلة بنيت بشكل غير صحيح ، ويسمح للمحققين الضارة بتخزين وإعادة عرض من مثل هذه العاملين مثلهم. تم تحديد هذه الضعف منذ النسخة 0.7.0 و في النسخة 0.10.5.",
+      "es": "Hyperledger Aries Cloud Agent Python (ACA-Py) es una base para construir aplicaciones y servicios de identidad descentralizados que se ejecutan en entornos no móviles. Al verificar las credenciales verificables en formato W3C utilizando JSON-LD con pruebas de datos vinculadas (LDP-VCs), el resultado de verificar la presentación `document.proof` no fue factorizado en el valor final `verified (`true`/`false`) en el registro de presentación. La falla permite a los titulares de Credenciales verificables en formato W3C que utilizan JSON-LD con pruebas de datos vinculados (LDPs) presentar pruebas incorrectamente construidas, y permite a los verificadores maliciosos guardar y reproducir una presentación de los titulares como su propia. Esta vulnerabilidad ha sido fijada desde la versión 0.7.0 y en la versión 0.10.5.",
+      "fr": "Hyperledger Aries Cloud Agent Python (ACA-Py) est une base pour la construction d'applications et de services d'identité décentralisées exécutés dans des environnements non mobiles. Lors de la vérification des identifiants vérifiables en format W3C à l'aide de JSON-LD avec des données liées à la preuve (LDP-VC), le résultat de la vérification de la présentation `document.proof` n'a pas été pris en compte dans la valeur finale `verified (`true`/`false`) sur le dossier de présentation. La faille permet aux titulaires de W3C Format Verifiable Credentials utilisant JSON-LD avec des données liées à la preuve (LDP) de présenter des preuves incorrectement construites, et permet aux vérificateurs malveillants de sauvegarder et de reproduire une présentation de tels titulaires comme leur propre. Cette vulnérabilité a été fixée depuis la version 0.7.0 et dans la version 0.10.5.",
+      "hi": "हाइपरलेजर मेष क्लाउड एजेंट पायथन (ACA-Py) गैर-मोबाइल वातावरण में चलने वाले विकेन्द्रीकृत पहचान अनुप्रयोगों और सेवाओं के निर्माण के लिए एक आधार है। लिंक्ड डेटा प्रूफ (LDP-VCs) के साथ JSON-LD का उपयोग करके W3C प्रारूप सत्यापित करने योग्य प्रमाणपत्रों की पुष्टि करते समय, प्रस्तुति `document.proof` को सत्यापित करने का परिणाम प्रस्तुति रिकॉर्ड पर अंतिम `verified मान (`true`/`false`) में नहीं लिया गया था। त्रुटि W3C प्रारूप सत्यापित प्रमाणपत्रों के धारकों को JSON-LD का उपयोग करके गलत तरीके से निर्मित प्रमाणपत्र प्रस्तुत करने में सक्षम बनाती है, और दुर्भावनापूर्ण सत्यापनकर्ताओं को अपने जैसे धारकों से प्रस्तुति को सहेजने और पुनः खेलने की अनुमति देती है। यह भेद्यता 0.7.0 और 0.10.5 संस्करण के बाद से तय की गई है।",
+      "en": "Hyperledger Aries Cloud Agent Python (ACA-Py) is a foundation for building decentralized identity applications and services running in non-mobile environments. When verifying W3C Format Verifiable Credentials using JSON-LD with Linked Data Proofs (LDP-VCs), the result of verifying the presentation `document.proof` was not factored into the final `verified` value (`true`/`false`) on the presentation record. The flaw enables holders of W3C Format Verifiable Credentials using JSON-LD with Linked Data Proofs (LDPs) to present incorrectly constructed proofs, and allows malicious verifiers to save and replay a presentation from such holders as their own. This vulnerability has been present since version 0.7.0 and fixed in version 0.10.5."
+    }
+  },
+  "CVE-2024-22087": {
+    "severity": "Critical",
+    "texts": {
+      "ar": "الطريق في main.c في Pico HTTP Server في C عبر f3b69a6 لديه إفراط حافظ على أساس كومة sprintf عبر URI طويل ، مما يؤدي إلى تنفيذ رمز عن بعد.",
+      "es": "La ruta en main.c en Pico HTTP Server en C a través de f3b69a6 tiene un desbordamiento de buffer basado en una pila de sprintf a través de una URI larga, lo que conduce a la ejecución remota de código.",
+      "fr": "la route dans main.c dans Pico HTTP Server en C à travers f3b69a6 a un débordement de tampon sprintf basé sur une pile via une longue URI, conduisant à l'exécution de code à distance.",
+      "zh": "在Pico HTTP Server中,C 中通过f3b69a6的 main.c 中的路线通过长度的URI,通过sprintf堆基于的缓冲器溢出,导致远程代码执行.",
+      "en": "route in main.c in Pico HTTP Server in C through f3b69a6 has an sprintf stack-based buffer overflow via a long URI, leading to remote code execution."
+    }
+  },
+  "CVE-2024-23182": {
+    "severity": "High",
+    "texts": {
+      "ar": "ضعف عبور المسار النسبي في a-blog cms Ver.3.1.x نسخة سلسلة قبل Ver.3.1.7 ، Ver.3.0.x نسخة سلسلة قبل Ver.3.0.29 ، Ver.2.11.x نسخة سلسلة قبل Ver.2.11.58 ، Ver.2.10.x نسخة سلسلة قبل Ver.2.10.50 ، و Ver.2.9.0 و سابقة يسمح للمهاجم المصادقة عن بعد بحذف الملفات التعسفية على الخادم.",
+      "es": "La vulnerabilidad relativa de la ruta en las versiones de la serie Ver.3.1.x anteriores a Ver.3.1.7, Ver.3.0.x anteriores a Ver.3.0.29, Ver.2.11.x anteriores a Ver.2.11.58, Ver.2.10.x anteriores a Ver.2.10.50 y Ver.2.9.0 y anteriores permite a un atacante autenticado remoto borrar archivos arbitrarios en el servidor.",
+      "fr": "La vulnérabilité relative de traversée de chemin dans les versions de la série Ver.3.1.x avant Ver.3.1.7, Ver.3.0.x avant Ver.3.0.29, Ver.2.11.x avant Ver.2.11.58, Ver.2.10.x avant Ver.2.10.50 et Ver.2.9.0 et plus tôt permet à un attaquant authentifié à distance de supprimer des fichiers arbitraires sur le serveur."
+    }
+  }
+}
