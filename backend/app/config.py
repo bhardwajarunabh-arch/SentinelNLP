@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     allowed_origins: str = "http://localhost:5173"
     random_seed: int = 42
     baseline_model_path: Path = Path("models/baseline")
-    transformer_model_path: Path = Path("models/xlmr")
+    transformer_model_path: Path = Path("models/xlmr_severity")
     max_input_length: int = 10000
     nvd_page_size: int = 2000
     nvd_request_delay_seconds: float = 0.7

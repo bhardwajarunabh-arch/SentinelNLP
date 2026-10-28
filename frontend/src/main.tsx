@@ -257,7 +257,7 @@ function OverviewView({
             <CheckCircle2 size={13} color="#10b981" />
             <span>
               {faithfulnessSummary?.aggregation?.mean_deletion_auc !== undefined
-                ? `LIME deletion AUC · n=${faithfulnessSummary.sample_count} CVEs`
+                ? `English-only evaluation · n=${faithfulnessSummary.sample_count} (baseline test n=${evaluation?.sample_count ?? "—"})`
                 : "Faithfulness artifact not available"}
             </span>
           </div>
@@ -886,7 +886,8 @@ function DatasetView({ status }: { status: any }) {
             <span>Artifact Ledger & File Provenance</span>
           </h3>
         </div>
-        <table className="enterprise-table">
+        <div className="table-scroll-container">
+        <table className="enterprise-table artifact-ledger-table">
           <thead>
             <tr>
               <th>Dataset Artifact</th>
@@ -934,6 +935,69 @@ function DatasetView({ status }: { status: any }) {
             </tr>
           </tbody>
         </table>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function SystemStatusView({
+  status,
+  apiOnline,
+}: {
+  status: any;
+  apiOnline: boolean | null;
+}) {
+  const checks: Array<[string, boolean | null | undefined]> = [
+    ["API server", apiOnline],
+    ["Dataset files", status?.dataset_available],
+    ["Baseline model", status?.baseline_available],
+    ["Transformer model", status?.transformer_available],
+    ["Translations", status?.translations_available],
+    ["Evaluation artifacts", status?.evaluation_artifacts_available],
+  ];
+
+  return (
+    <>
+      <div className="page-header">
+        <div className="eyebrow-badge">
+          <Activity size={12} />
+          <span>Live API Capability Checks</span>
+        </div>
+        <h1>System Status</h1>
+        <p className="subtitle">
+          Read-only availability flags reported by the running SentinelNLP API.
+        </p>
+      </div>
+      <div className="glass-panel" style={{ padding: "24px" }}>
+        <div className="panel-title-bar">
+          <h3>
+            <Activity size={18} color="#38bdf8" />
+            <span>Backend Services & Local Resources</span>
+          </h3>
+        </div>
+        <table className="enterprise-table">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {checks.map(([label, available]) => (
+              <tr key={label}>
+                <td><strong>{label}</strong></td>
+                <td>
+                  {available === true
+                    ? "Available"
+                    : available === false
+                      ? "Unavailable"
+                      : "Checking"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
@@ -949,12 +1013,12 @@ function ResearchStatusView() {
       title: "Human Validation & Review of Pilot Translations",
       status: "Needs human review",
       statusClass: "medium",
-      summary: "The stratified review sheet is generated, but every row remains explicitly marked unreviewed.",
-      evidence: "artifacts/translation_pilot_25_review_stratified.csv",
+      summary: "The current review queue remains explicitly unreviewed; automated checks do not establish translation quality.",
+      evidence: "artifacts/translation_human_review_summary_v1.json · artifacts/translation_human_review_worksheet_gpu_v5.csv",
       metrics: [
-        ["Review rows", "125"],
+        ["Review rows", "22"],
         ["Languages", "5 target"],
-        ["Automated state", "Validated"],
+        ["Completed reviews", "0"],
       ],
       actions: [
         "Perform native/expert sanity checks on high-risk Hindi, Arabic, and Chinese translations.",
@@ -965,22 +1029,22 @@ function ResearchStatusView() {
     },
     {
       id: "D",
-      title: "Full Multilingual Faithfulness (RQ3 Analysis)",
-      status: "Blocked by matched translations",
+      title: "Cross-Language Faithfulness (RQ3 Analysis)",
+      status: "Blocked on matched explanations",
       statusClass: "high",
-      summary: "English LIME faithfulness is available; cross-lingual attribution stability and the RQ3 hypothesis test need complete translated test records.",
-      evidence: "artifacts/expanded_rq3_analysis.json",
+      summary: "The saved RQ3 report records zero matched CVEs and predates the newer test-translation file; current cross-language faithfulness has not been evaluated.",
+      evidence: "artifacts/expanded_rq3_analysis.json · data/translations/expanded_test_translations_generated.csv",
       metrics: [
         ["English faithfulness", "325 CVEs"],
-        ["Matched translations", "0"],
+        ["Matches in saved RQ3 report", "0"],
         ["RQ3 tests", "Not supported"],
       ],
       actions: [
-        "Run feature attribution or token saliency for every populated target-language test record.",
-        "Join explanation faithfulness with severity changes on the same CVE-language pairs.",
-        "Complete statistical testing only after the matched multilingual denominator is non-zero.",
+        "Evaluate explanation faithfulness for eligible, validated test translations.",
+        "Join explanation and prediction results by the same CVE and language.",
+        "Refresh the RQ3 analysis and report exclusions before statistical testing.",
       ],
-      note: "The current artifact supports no cross-language association or causal claim; multilingual statistical power is zero.",
+      note: "The zero-match count is from the older saved analysis; it does not show that the newer test-translation file has no translations. No cross-language association or causal claim is supported yet.",
     },
     {
       id: "E",
@@ -1023,15 +1087,15 @@ function ResearchStatusView() {
             <div className="metric-icon-bubble"><Eye size={14} /></div>
           </div>
           <div className="metric-val">Unreviewed</div>
-          <div className="metric-foot"><span>125 stratified rows await human labels</span></div>
+          <div className="metric-foot"><span>22 review-queue pairs await human labels</span></div>
         </div>
         <div className="metric-card glass-panel alert">
           <div className="metric-card-top">
-            <span className="metric-title">RQ3 Cross-Language Power</span>
+            <span className="metric-title">Saved RQ3 Matches</span>
             <div className="metric-icon-bubble"><ShieldAlert size={14} /></div>
           </div>
           <div className="metric-val alert">0</div>
-          <div className="metric-foot"><span>matched translated CVEs in current artifact</span></div>
+          <div className="metric-foot"><span>matches in saved RQ3 report (stale)</span></div>
         </div>
         <div className="metric-card glass-panel">
           <div className="metric-card-top">
@@ -1228,7 +1292,7 @@ function App() {
           )}
           {active === "dataset" && <DatasetView status={status} />}
           {active === "research-status" && <ResearchStatusView />}
-          {active === "status" && <DatasetView status={status} />}
+          {active === "status" && <SystemStatusView status={status} apiOnline={apiOnline} />}
         </main>
 
         <footer>
@@ -1243,8 +1307,13 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!);
+root.render(
   <StrictMode>
     <App />
   </StrictMode>
 );
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => root.unmount());
+}

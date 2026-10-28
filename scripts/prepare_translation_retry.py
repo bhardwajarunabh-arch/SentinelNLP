@@ -6,6 +6,7 @@ import argparse
 import csv
 import hashlib
 import json
+from collections import Counter
 from pathlib import Path
 
 
@@ -23,6 +24,16 @@ def main() -> None:
     test_ids = set(json.loads(args.splits.read_text(encoding="utf-8"))["splits"]["test"])
     failures = audit["failures"]
     assert len(failures) == 40
+    failure_categories = Counter(row["primary_failure_category"] for row in failures)
+    assert failure_categories == {
+        "missing_or_altered_technical_identifiers": 34,
+        "suspiciously_short_output": 6,
+    }
+    assert all(
+        row["language"] == "zh"
+        for row in failures
+        if row["primary_failure_category"] == "suspiciously_short_output"
+    )
     pairs = {(row["cve_id"], row["language"].lower()) for row in failures}
     assert len(pairs) == 40
     assert pairs <= set(pilot_pairs)

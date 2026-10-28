@@ -1,6 +1,9 @@
 import csv
 import hashlib
+from collections import Counter
 from pathlib import Path
+
+from scripts.translate_expanded_test import _write_rows
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -13,6 +16,15 @@ def test_retry_manifest_has_exact_unique_targets() -> None:
     assert len(rows) == 40
     assert len(pairs) == 40
     assert all(row["original_validation_status"] != "valid" for row in rows)
+    assert Counter(row["primary_failure_category"] for row in rows) == {
+        "missing_or_altered_technical_identifiers": 34,
+        "suspiciously_short_output": 6,
+    }
+    assert all(
+        row["language"] == "zh"
+        for row in rows
+        if row["primary_failure_category"] == "suspiciously_short_output"
+    )
 
 
 def test_retry_and_v2_preserve_expected_pair_counts() -> None:
@@ -39,3 +51,14 @@ def test_retry_source_hashes_match_original_text() -> None:
         == row["source_sha256"]
         for row in rows
     )
+
+
+def test_retry_checkpoint_replaces_csv_atomically(tmp_path: Path) -> None:
+    path = tmp_path / "retry.csv"
+    _write_rows(path, [{"cve_id": "CVE-2026-0001", "language": "hi"}])
+
+    rows = list(csv.DictReader(path.open(encoding="utf-8")))
+
+    assert len(rows) == 1
+    assert rows[0]["cve_id"] == "CVE-2026-0001"
+    assert not path.with_name(f"{path.name}.tmp").exists()

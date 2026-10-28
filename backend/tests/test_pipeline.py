@@ -10,7 +10,7 @@ from backend.app.data_pipeline import (
     parse_nvd_vulnerability,
 )
 from backend.app.faithfulness import area_under_curve, perturbation_curve
-from backend.app.metrics import agreement_metrics
+from backend.app.metrics import agreement_metrics, classification_metrics
 from backend.app.risk import critical_risk_metrics
 
 
@@ -60,6 +60,19 @@ def test_metrics_distinguish_agreement_and_critical_risk() -> None:
     result = critical_risk_metrics(["Critical", "Critical", "Low"], ["High", "Critical", "Low"])
     assert result["critical_underprediction_count"] == 1
     assert result["critical_underprediction_rate"] == 0.5
+    assert result["critical_false_negative_count"] == 1
+
+
+def test_classification_metrics_include_mcc_and_ordinal_scores() -> None:
+    result = classification_metrics(
+        ["Critical", "High", "Low", "Medium"],
+        ["High", "High", "Low", "Critical"],
+        labels=["Critical", "High", "Low", "Medium"],
+    )
+
+    assert result["matthews_correlation_coefficient"] is not None
+    assert result["ordinal"]["label_order"] == ["Low", "Medium", "High", "Critical"]
+    assert result["ordinal"]["mean_absolute_error"] == 0.75
 
 
 def test_faithfulness_curve_and_area() -> None:

@@ -19,6 +19,7 @@ def critical_risk_metrics(y_true: list[str], y_pred: list[str]) -> dict[str, Any
             if critical else None
         ),
         "critical_underprediction_count": len(underpredicted),
+        "critical_false_negative_count": len(underpredicted),
         "critical_underprediction_rate": len(underpredicted) / len(critical) if critical else None,
         "undefined_reason": "No eligible Critical ground-truth examples" if not critical else None,
     }

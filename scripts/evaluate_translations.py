@@ -34,40 +34,59 @@ def evaluate_translations(
     test_ids = set(split_manifest["splits"]["test"])
     valid_rows: list[dict[str, str]] = []
     excluded_rows: dict[str, int] = {}
+    excluded_pairs: list[dict[str, str]] = []
+    validation_status_disagreements: list[dict[str, str]] = []
     seen_pairs: set[tuple[str, str]] = set()
+
+    def exclude(pair: tuple[str, str], reason: str) -> None:
+        excluded_rows[reason] = excluded_rows.get(reason, 0) + 1
+        excluded_pairs.append({"cve_id": pair[0], "language": pair[1], "reason": reason})
+
     for row in rows:
         pair = (row.get("cve_id", ""), row.get("language", "").lower())
         if pair in seen_pairs:
-            excluded_rows["duplicate_cve_language"] = excluded_rows.get("duplicate_cve_language", 0) + 1
+            exclude(pair, "duplicate_cve_language")
             continue
         seen_pairs.add(pair)
-        reason = row.get("validation_status", "valid")
-        if reason != "valid":
-            excluded_rows[reason] = excluded_rows.get(reason, 0) + 1
-            continue
         if row["cve_id"] not in records:
             raise ValueError(f"Translation CVE is missing from NVD records: {row['cve_id']}")
         if row["cve_id"] not in test_ids:
-            excluded_rows["not_in_test_split"] = excluded_rows.get("not_in_test_split", 0) + 1
+            exclude(pair, "not_in_test_split")
             continue
         if row["original_text"] != records[row["cve_id"]].description:
-            excluded_rows["source_mismatch"] = excluded_rows.get("source_mismatch", 0) + 1
+            exclude(pair, "source_mismatch")
+            continue
+        if row.get("severity") and row["severity"] != records[row["cve_id"]].severity:
+            exclude(pair, "severity_mismatch")
             continue
         computed, _ = validate_translation_for_language(
             records[row["cve_id"]].description, row.get("translated_text", ""), row["language"].lower()
         )
         if computed != "valid":
-            excluded_rows[computed] = excluded_rows.get(computed, 0) + 1
+            exclude(pair, computed)
             continue
-        if row.get("severity") and row["severity"] != records[row["cve_id"]].severity:
-            excluded_rows["severity_mismatch"] = excluded_rows.get("severity_mismatch", 0) + 1
-            continue
+        if row.get("validation_status") not in {"", "valid"}:
+            validation_status_disagreements.append(
+                {
+                    "cve_id": pair[0],
+                    "language": pair[1],
+                    "stored_status": row["validation_status"],
+                    "recomputed_status": computed,
+                }
+            )
         valid_rows.append(row)
+    translation_review = {
+        "status": "not_human_reviewed",
+        "human_review_performed": False,
+    }
     if not valid_rows:
         result = {
             "status": "blocked_no_reliable_translations",
             "sample_count": 0,
             "excluded_rows": excluded_rows,
+            "excluded_pairs": excluded_pairs,
+            "validation_status_disagreements": validation_status_disagreements,
+            "translation_review": translation_review,
             "labels": LABELS,
             "languages": {
                 language: {"sample_count": 0, "status": "missing"}
@@ -101,6 +120,9 @@ def evaluate_translations(
         ),
         "sample_count": len(valid_rows),
         "excluded_rows": excluded_rows,
+        "excluded_pairs": excluded_pairs,
+        "validation_status_disagreements": validation_status_disagreements,
+        "translation_review": translation_review,
         "labels": LABELS,
         "english_severity": classification_metrics(
             english_labels, english_predictions, english_probabilities, labels=LABELS
@@ -120,6 +142,7 @@ def evaluate_translations(
     }
     all_english_predictions: list[str] = []
     prediction_rows: list[dict[str, str]] = []
+    translated_predictions_by_language: dict[str, dict[str, str]] = {}
     for language in sorted({row["language"] for row in valid_rows}):
         language_rows = [row for row in valid_rows if row["language"] == language]
         indices = [
@@ -128,9 +151,19 @@ def evaluate_translations(
         translated_predictions, translated_probabilities = predict(
             model_path, [row["translated_text"] for row in language_rows]
         )
+        translated_predictions_by_language[language] = {
+            row["cve_id"]: prediction
+            for row, prediction in zip(language_rows, translated_predictions)
+        }
         language_labels = [records[row["cve_id"]].severity for row in language_rows]
         result["languages"][language] = {
             "sample_count": len(language_rows),
+            "excluded_count": sum(
+                pair["language"] == language for pair in excluded_pairs
+            ),
+            "excluded_cve_ids": sorted(
+                {pair["cve_id"] for pair in excluded_pairs if pair["language"] == language}
+            ),
             "agreement": agreement_metrics(
                 [english_predictions[index] for index in indices], translated_predictions
             ),
@@ -160,6 +193,34 @@ def evaluate_translations(
         predictions, _ = predict(model_path, [row["translated_text"] for row in language_rows])
         all_translated_predictions.extend(predictions)
     result["agreement"] = agreement_metrics(all_english_predictions, all_translated_predictions)
+    paired_languages = sorted(translated_predictions_by_language)
+    common_ids = (
+        set.intersection(
+            *(set(translated_predictions_by_language[language]) for language in paired_languages)
+        )
+        if paired_languages
+        else set()
+    )
+    result["paired_cross_language"] = {
+        "languages": paired_languages,
+        "sample_count": len(common_ids),
+        "cve_ids": sorted(common_ids),
+        "excluded_cve_ids": sorted(
+            {
+                row["cve_id"]
+                for row in excluded_pairs
+                if row["language"] in paired_languages
+            }
+        ),
+        "pairwise_prediction_agreement": {
+            f"{left}:{right}": agreement_metrics(
+                [translated_predictions_by_language[left][cve_id] for cve_id in sorted(common_ids)],
+                [translated_predictions_by_language[right][cve_id] for cve_id in sorted(common_ids)],
+            )
+            for index, left in enumerate(paired_languages)
+            for right in paired_languages[index + 1 :]
+        },
+    }
     if predictions_output is not None:
         predictions_output.parent.mkdir(parents=True, exist_ok=True)
         with predictions_output.open("w", newline="", encoding="utf-8") as handle:

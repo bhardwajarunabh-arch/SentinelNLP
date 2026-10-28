@@ -488,6 +488,15 @@ h1 {
   font-size: 13px;
 }
 
+.table-scroll-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.artifact-ledger-table {
+  min-width: 820px;
+}
+
 .enterprise-table th {
   text-align: left;
   font-family: "JetBrains Mono", monospace;

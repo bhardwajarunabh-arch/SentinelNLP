@@ -124,8 +124,8 @@ not silently treated as valid evaluation samples. The current artifact has 19
 valid rows per target language and excludes 5 rows with missing technical
 identifiers.
 
-When `models\xlmr` contains a trained XLM-R model, the API loads its tokenizer
-and model once during application startup using local files only. The
+When `models\xlmr_severity` contains a trained XLM-R model, the API loads its
+tokenizer and model once during application startup using local files only. The
 `/api/status` and `/api/models` endpoints report XLM-R as available only after
 that load succeeds. If PyTorch, Transformers, or the model files are missing,
 the baseline API remains available and XLM-R requests return HTTP 503 with the
@@ -247,10 +247,67 @@ The audit retains the complete source and generated text for every rejected or
 suspicious row in `artifacts\translation_pilot_failure_analysis.json` and
 records strictly matched five-language coverage in
 `artifacts\translation_pilot_matched_coverage.json`. Identifier protection is
-used only for new or explicitly retried generation: placeholders must restore
-exactly, otherwise the row remains failed. Existing pilot output is never
+used only for new or explicitly retried generation. Internal placeholder slots
+are checked across chunk boundaries, but are not sent to NLLB: the model
+repeatedly dropped or altered visible markers even when those markers had
+round-tripped through its tokenizer. The translation pipeline translates only
+the surrounding text and restores each original identifier into its verified
+source slot; angle-bracket path variables are protected occurrence-by-
+occurrence, and punctuation and whitespace at span boundaries stay outside
+the translated text. Missing, duplicated, unknown, fused, or damaged
+identifiers reject the row. Each generated text span has its own output-token
+cap and must end with the model's EOS token; a missing completion marker
+rejects the row. Chinese shortness checks count Han characters rather than
+whitespace-delimited words. These exact-preservation and completion checks do
+not establish semantic translation quality. Existing pilot output is never
 rewritten, and the review worksheet remains `unreviewed` until a person labels
 each row.
+
+The 22-pair failure-recovery set has a separate review-ready worksheet at
+`artifacts\translation_human_review_worksheet_gpu_v5.csv` and a predeclared
+rubric and scale-up gate at
+`artifacts\translation_human_review_protocol_v1.md`. Only qualified
+target-language reviewers should enter ratings. The worksheet distinguishes
+human review from automated integrity checks and leaves all human ratings
+blank until reviewers supply them. After review data is entered, validate and
+summarize it with:
+
+```powershell
+python scripts\summarize_translation_human_review.py `
+  --worksheet artifacts\translation_human_review_worksheet_gpu_v5.csv `
+  --output artifacts\translation_human_review_summary_v1.json
+```
+
+The summary reports unreviewed, incomplete, accepted, and rejected rows;
+incomplete entries are never counted as passes. Use `--allow-incomplete` only
+for a clearly labeled progress report. The script derives acceptance from the
+protocol rubric and keeps the full translation grid NO-GO unless the stated
+human-review gate is met. These 22 targeted failure-recovery pairs are not a
+representative random sample and cannot establish the quality of all 1,625
+planned translations.
+
+For a bounded retry, `scripts\prepare_translation_retry.py` writes the exact
+audited target-pair manifest. The translation generator accepts that manifest,
+requires CUDA when `--device cuda` is specified, supports local-only pinned
+model loading, and checkpoints after each generated batch:
+
+```powershell
+python scripts\prepare_translation_retry.py
+
+python scripts\translate_expanded_test.py `
+  --pairs-file artifacts\translation_pilot_retry_targets.csv `
+  --output data\translations\expanded_translation_pilot_25_retry_gpu.csv `
+  --revision f8d333a098d19b4fd9a8b18f94170487ad3f821d `
+  --device cuda `
+  --local-files-only `
+  --retry-failed
+```
+
+The retry output and its sidecar manifest remain separate from the original
+pilot CSV. GPU memory, model-load/generation timing, and CUDA use are recorded
+in the generated manifest; a targeted validation/comparison should be run
+before promoting any machine translation, and human semantic review remains
+required.
 
 To build the non-destructive research audit and metrics bundle for the
 expanded experiment, run:
@@ -291,3 +348,49 @@ faithfulness, and blocked multilingual artifacts are stored under
 `data\expanded`, `models\expanded_baseline`, and `artifacts\expanded_*`.
 The expanded test translation template contains 1,625 blank rows
 (325 CVEs x 5 languages); no translation service is called by the repository.
+
+### Leakage-safe XLM-R evaluation
+
+`scripts\train_xlmr.py` trains a fresh XLM-R checkpoint from the pinned
+`FacebookAI/xlm-roberta-base` revision using only the expanded split manifest's
+training CVEs. It uses the validation CVEs for macro-F1 checkpoint selection
+and early stopping, records split CVE IDs and hashes, and refuses to overwrite
+a non-empty experiment directory. For example:
+
+```powershell
+python scripts\train_xlmr.py `
+  --data data\expanded\nvd_records.json `
+  --splits data\expanded\cve_splits.json `
+  --output artifacts\xlmr_english_20261026_v2 `
+  --model FacebookAI/xlm-roberta-base `
+  --revision e73636d4f797dec63c3081bb6ed5c7b0bb3f2089
+```
+
+For a validation-motivated class-weighted follow-up, pass
+`--class-weighting inverse_sqrt`; weights are derived from training counts
+only, and per-class validation precision, recall, and F1 are logged each
+epoch.
+
+After training, `scripts\evaluate_xlmr_research.py` evaluates English and
+recomputed-valid translations on the same fixed test CVEs, reports bootstrap
+intervals and paired baseline comparisons, and writes predictions and metrics
+to a separate experiment directory. Translation validation is automated;
+machine translations remain unreviewed unless separately marked as human
+reviewed. The XLM-R workflow requires CUDA-enabled PyTorch, Transformers, and
+Accelerate in the selected Python environment.
+
+For a leakage-safe multilingual run, first create a `cve_ids` JSON and an exact
+`cve_id,language` CSV pair manifest containing only fixed train and validation
+CVEs, then run `scripts\translate_expanded_test.py` with
+`--split-scope train_validation`, those manifests, and a separate resumable
+output CSV. Pin `--model facebook/nllb-200-distilled-600M` to the recorded
+NLLB revision and generation settings. Pass the resulting CSV to
+`scripts\train_xlmr.py --multilingual-translations`; only nonempty rows with
+matching source text, severity, source hash, and recomputed automated
+validation status are admitted. Failed and missing pairs are recorded in
+`translation_validation_report.json`. To compare previous runs on the same
+valid test rows, pass their `predictions` folders using repeated
+`--comparison-prediction-dir` arguments to `scripts\evaluate_xlmr_research.py`.
+When previous test results have already been observed, add
+`--exploratory-test-comparison` so the evaluation artifacts explicitly record
+that interpretation.
